@@ -1130,8 +1130,8 @@ function sendOrderToPHP(cart) {
         total += item.price * item.quantity;
     });
 
-    // ✅ 傳送 items, type, total 給 PHP
-    return fetch('https://receive.great-site.net/order.php?action=new', {
+    // ✅ 修改為你的 PHP 網址（InfinityFree 網址）
+    return fetch('https://你的網站.epizy.com/order.php?action=new', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -1139,7 +1139,7 @@ function sendOrderToPHP(cart) {
         body: JSON.stringify({
             items: cart,
             type: type,
-            total: total // ✅ 把總價一起送過去
+            total: total
         })
     })
     .then(response => {
@@ -1149,10 +1149,14 @@ function sendOrderToPHP(cart) {
         return response.json();
     })
     .then(data => {
-        console.log("PHP 回應：", data);
+        console.log("✅ 訂單已送出，伺服器回應：", data);
         return data;
+    })
+    .catch(error => {
+        console.error("❌ 訂單送出失敗：", error);
     });
 }
+
 
     </script>
 	
